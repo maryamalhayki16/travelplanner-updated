@@ -2,7 +2,7 @@ import streamlit as st
 import requests
 from datetime import timedelta
 
-BASE_URL = "http://127.0.0.1:8000"
+BASE_URL = "https://travelplanner-updated.onrender.com"
 
 st.markdown(
     """
