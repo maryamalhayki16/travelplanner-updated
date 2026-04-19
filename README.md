@@ -77,3 +77,5 @@ travelplanner-app/
 - Add user accounts & saved trips
 
 ## Demo Video
+
+Try the [application](https://aitravelplanner-app.streamlit.app/) for yourself!
