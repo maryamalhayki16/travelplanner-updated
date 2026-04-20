@@ -76,6 +76,5 @@ travelplanner-app/
 - Improve ranking algorithm
 - Add user accounts & saved trips
 
-## Demo Video
-
+[Demo Video](https://youtu.be/-hQVeN0YNJU)
 Try the [application](https://aitravelplanner-app.streamlit.app/) for yourself!
