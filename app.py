@@ -51,7 +51,7 @@ with st.container(border=True):
     destinations = st.text_input("Destinations (comma separated)", placeholder='e.g. Rome, Milan')
     destinations_list = [d.strip() for d in destinations.split(",") if d.strip()]
 
-    budget = st.number_input("Budget (Dollars)", min_value=700)
+    budget = st.number_input("Budget (dollars)", min_value=700)
 
     trip_duration = st.slider("Trip Duration (days)", 1, 30, 5)
 
