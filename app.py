@@ -252,7 +252,7 @@ if st.session_state.results:
         itinerary = results.get("itinerary", "")
         st.code(itinerary, language="markdown")
         st.download_button(
-                "📥 Download TXT",
+                "📥 Download Itinerary",
                 itinerary,
                 file_name=f"{destinations} itinerary.txt",
                 mime="text/plain"
