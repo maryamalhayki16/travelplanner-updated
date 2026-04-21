@@ -48,10 +48,10 @@ with st.container(border=True):
     with col3: 
         include_hotels = st.checkbox("Include Hotels 🏨")
 
-    destinations = st.text_input("Destinations (comma separated)")
+    destinations = st.text_input("Destinations (comma separated)", placeholder='e.g. Rome, Milan')
     destinations_list = [d.strip() for d in destinations.split(",") if d.strip()]
 
-    budget = st.number_input("Budget", min_value=500)
+    budget = st.number_input("Budget (Dollars)", min_value=700)
 
     trip_duration = st.slider("Trip Duration (days)", 1, 30, 5)
 
@@ -64,42 +64,31 @@ with st.container(border=True):
         "Interests",
         ["Exploring", "Historical", "Chill", "Adventure", "Sightseeing", "Nature"]
     )
-def get_flight_input():
-    st.markdown("#### ✈️ Flight Details")
-    source = st.text_input("From (Airport Code)")
-    arrival = st.text_input("To (Airport Code)")
-    outbound_date = st.date_input("Outbound Date")
-    return source, arrival, outbound_date
-def get_hotel_input():
-    st.markdown("#### 🏨 Hotel Details")
-    hotel_location = st.text_input("Hotel Location")
-    check_in = st.date_input("Check-in Date")
-    return hotel_location, check_in
 
 
 if include_flights and include_hotels:
     with st.container(border=True):
-        col1, col2 = st.columns(2)
+        col1, col2= st.columns(2)
         with col1: 
             st.markdown("#### ✈️ Flight Details")
-            source = st.text_input("From (Airport Code)")
-            arrival = st.text_input("To (Airport Code)")
-            outbound_date = st.date_input("Outbound Date")
+            source = st.text_input("From (Airport Code)", placeholder='e.g. BAH')
+            arrival = st.text_input("To (Airport Code)", placeholder='e.g. FCO')
+            outbound_date = st.date_input("Outbound Date", min_value="today")
         with col2:
             st.markdown("#### 🏨 Hotel Details")
-            hotel_location = st.text_input("Hotel Location")
-            check_in = st.date_input("Check-in Date")
+            hotel_location = st.text_input("Hotel Location", placeholder='e.g. Rome')
+            check_in = st.date_input("Check-in Date", min_value="today")
 elif include_flights:
     with st.container(border=True):
         st.markdown("#### ✈️ Flight Details")
-        source = st.text_input("From (Airport Code)")
-        arrival = st.text_input("To (Airport Code)")
-        outbound_date = st.date_input("Outbound Date")
+        source = st.text_input("From (Airport Code)", placeholder='e.g. BAH')
+        arrival = st.text_input("To (Airport Code)", placeholder='e.g. FCO')
+        outbound_date = st.date_input("Outbound Date", min_value="today")
 elif include_hotels:
     with st.container(border=True):
         st.markdown("#### 🏨 Hotel Details")
-        hotel_location = st.text_input("Hotel Location")
-        check_in = st.date_input("Check-in Date")
+        hotel_location = st.text_input("Hotel Location", placeholder='e.g. Rome')
+        check_in = st.date_input("Check-in Date", min_value="today")
 
 
 def render_flights(flights):
@@ -157,7 +146,7 @@ def render_hotels(hotels, cols_num=3):
                 else:
                     st.caption("No amenities listed")
 
-# -------------------- ACTION --------------------
+
 
 if st.button("🚀 Generate My Trip"):
 
