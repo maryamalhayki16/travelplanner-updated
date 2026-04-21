@@ -28,9 +28,10 @@ ANTHROPIC_API_KEY = os.getenv('ANTHROPIC_API_KEY')
 @lru_cache(maxsize=1)
 def initialize_llm(): # initialize and cache the llm, using claude
     return LLM(
-    model="gemini-2.5-flash",
-    provider="google",
-    api_key=GOOGLE_API_KEY
+    model="claude-sonnet-4-6",
+    provider="anthropic",
+    api_key=ANTHROPIC_API_KEY,
+    extra_headers={"anthropic-beta": "prompt-caching-2024-07-31"}
     )
 
 # pydantic models
@@ -220,9 +221,21 @@ async def generate_itinerary(destinations, flights, hotels,
         llm=llm,
         verbose=True
     )
+    BASE_PROMPT = """
+    You are an expert travel planner who builds detailed itineraries.
+    You ALWAYS use web search to find real attractions, restaurants, and experiences.
+    You optimize plans based on budget, vibe, and trip type.
 
+    Create a detailed itinerary with:
+    - Daily breakdown
+    - Food recommendations
+    - Activities
+    - Logistics
+    """
     task = Task(
         description=f"""
+        {BASE_PROMPT}
+
         Create a {days}-day itinerary.
 
         Destinations: {", ".join(destinations)}
@@ -235,11 +248,10 @@ async def generate_itinerary(destinations, flights, hotels,
 
         Dates: {check_in} to {check_out}
 
-        Include daily plans, food, activities, and logistics.
         """,
         agent=agent,
         expected_output="""A well-structured, visually appealing itinerary in markdown format, including flight, hotel, 
-        and day-wise breakdown with emojis, headers, and bullet points."""
+        and day-wise breakdown with emojis, headers, and bullet points. DO NOT use tables in your output"""
         )
 
     crew = Crew(agents=[agent], tasks=[task], process=Process.sequential)
