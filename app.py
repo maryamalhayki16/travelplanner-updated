@@ -209,7 +209,6 @@ if st.button("🚀 Generate My Trip"):
         except Exception as e:
             st.error(f"Something went wrong: {e}")
 
-# -------------------- RESULTS --------------------
 
 if st.session_state.results:
 
