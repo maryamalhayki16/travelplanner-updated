@@ -9,3 +9,4 @@ google-generativeai
 serpapi
 exa-py
 crewai[google-genai]
+crewai[anthropic]
